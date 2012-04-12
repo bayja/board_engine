@@ -1,0 +1,22 @@
+<h2>게시판 목록</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>게시판 이름</th>
+      <th>등록일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @boards.each do |board| %>
+      <tr>
+        <td><%= board.id %></td>
+        <td><%= link_to board.title, admin_articles_path(board.title) %></td>
+        <td><%= l board.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

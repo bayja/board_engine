@@ -1,0 +1,17 @@
+<h1><%= @board.title %></h1>
+
+<p>
+	<b>제목</b>
+	<%= @article.title %>
+</p>
+
+<p>
+	<b>본문</b>
+	<%= raw @article.body %>
+</p>
+
+<div class="form-actions">
+  <%= link_to '목록으로', :articles, :class => 'btn'  %>
+  <%= link_to '수정', edit_article_path(@board.title, @article), :class => 'btn' %>
+  <%= link_to '삭제', article_path(@board.title, @article), :method => 'delete', :confirm => '정말로 삭제하시겠습니까?', :class => 'btn btn-danger' %>
+</div>

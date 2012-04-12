@@ -1,6 +1,8 @@
 BoardEngine::Engine.routes.draw do
 	namespace :admin do
-		resources :boards
+		scope "b" do
+			resources :boards
+		end
 
 		scope "b/:board_title" do
 			resources :articles
@@ -9,6 +11,9 @@ BoardEngine::Engine.routes.draw do
 
 	scope "b" do
 		resources :boards
+	end
+	
+	scope "b/:board_title" do
 		resources :articles
 	end
 end
