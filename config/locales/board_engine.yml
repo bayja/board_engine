@@ -1,0 +1,22 @@
+# Korean (한글) translations for Ruby on Rails
+# by John Hwang (jhwang@tavon.org)
+# http://github.com/tavon
+# and Sunghee Kang(paranoiase@gmail.com)
+# http://www.twitter.com/paranoiase
+
+
+ko:
+  activerecord:
+    models:
+      board_engine/board: 게시판
+      board_engine/article: 게시물
+
+    attributes:
+      board_engine/article:
+        title: 제목
+        body: 본문
+        hit: 조회수
+        important: 공지글
+
+      board_engine/board:
+        title: 게시판 이름

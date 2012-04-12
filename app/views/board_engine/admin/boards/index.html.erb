@@ -12,7 +12,7 @@
     <% @boards.each do |board| %>
       <tr>
         <td><%= board.id %></td>
-        <td><%= link_to board.title, admin_articles_path(board.title) %></td>
+        <td><%= link_to t(board.title), admin_articles_path(board.title) %></td>
         <td><%= l board.created_at %></td>
       </tr>
     <% end %>
