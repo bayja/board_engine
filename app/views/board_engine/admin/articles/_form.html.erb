@@ -1,0 +1,9 @@
+  <fieldset>
+    <legend>글 등록/수정</legend>
+    <%= f.input :title %>
+    <%= f.input :body %>
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', [:admin, :articles], :class => 'btn' %>
+    </div>
+  </fieldset>

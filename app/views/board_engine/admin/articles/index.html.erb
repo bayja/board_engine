@@ -1,0 +1,25 @@
+<h1><%= @board.title %></h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>제목</th>
+      <th>조회수</th>
+      <th>등록일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.id %></td>
+        <td><%= link_to article.title, admin_article_path(@board.title, article) %></td>
+        <td><%= link_to article.hit %></td>
+        <td><%= l article.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @articles %>
+
+<%= link_to '새로운 글 등록', [:new, :admin, :article], :class => 'btn btn-primary' %>
