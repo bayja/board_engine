@@ -55,4 +55,9 @@ class BoardEngine::ArticlesController < ApplicationController
 	def is_from_engine
 		@is_from_engine = true
 	end
+
+	# board type에 따라 다른 template을 render (AbstractController::Rendering#_process_options)
+	def _process_options(options)
+		options[:prefixes] << "board_engine/articles/type_#{@board.board_type}"
+	end
 end

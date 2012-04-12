@@ -7,6 +7,7 @@ class CreateBoardEngineArticles < ActiveRecord::Migration
     	t.text			:body
     	t.integer		:hit, :default => 0
     	t.boolean		:important, :default => false
+      t.string    :attached_picture
 
       t.timestamps
     end

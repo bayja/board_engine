@@ -50,5 +50,9 @@ class BoardEngine::Admin::ArticlesController < BoardEngine::Admin::AdminsControl
 		@board = BoardEngine::Board.find_by_title(params[:board_title])
 	end
 
+	# board type에 따라 다른 template을 render (AbstractController::Rendering#_process_options)
+	def _process_options(options)
+		options[:prefixes] << "board_engine/admin/articles/type_#{@board.board_type}"
+	end
 end
 

@@ -1,0 +1,17 @@
+<h1><%= t @board.title %></h1>
+
+<% @articles.each do |article| %>
+  <ul class="thumbnails">
+    <li class="span3">
+      <div class="thumbnail">
+        <%= image_tag article.attached_picture.url %>
+        <h5><%= link_to truncate(article.title, :length => 20), article_path(@board.title, article) %></h5>
+        <p><%= truncate strip_tags(article.body), :length => 150 %></p>
+      </div>
+    </li>
+  </ul>  
+<% end %>
+
+<%= paginate @articles %>
+
+<%= link_to '새로운 글 등록', [:new, :admin, :article], :class => 'btn btn-primary' %>
