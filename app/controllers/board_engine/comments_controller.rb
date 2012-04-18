@@ -2,6 +2,11 @@
 
 class BoardEngine::CommentsController < ApplicationController
 	before_filter :is_from_engine
+	before_filter :require_user
+	before_filter(:only => :destroy) do |c|
+		@comment = BoardEngine::Comment.find params[:id]
+		c.send(:owner_required, @comment)
+	end
 
   def create
   	@comment = BoardEngine::Comment.new params[:comment]
@@ -16,7 +21,6 @@ class BoardEngine::CommentsController < ApplicationController
   end
   
   def destroy
-    @comment = BoardEngine::Comment.find params[:id]
     @comment.destroy
     article = @comment.commentable
     redirect_to article_path(article.board.title, article), :notice => "댓글을 삭제했습니다."
@@ -28,4 +32,5 @@ class BoardEngine::CommentsController < ApplicationController
 	def is_from_engine
 		@is_from_engine = true
 	end
+
 end
