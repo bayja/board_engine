@@ -17,6 +17,7 @@ ko:
         body: 본문
         hit: 조회수
         important: 공지글
+        attached_picture: 첨부이미지
 
       board_engine/board:
         title: 게시판 이름

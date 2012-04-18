@@ -15,3 +15,5 @@
   <%= link_to '수정', edit_article_path(@board.title, @article), :class => 'btn' %>
   <%= link_to '삭제', article_path(@board.title, @article), :method => 'delete', :confirm => '정말로 삭제하시겠습니까?', :class => 'btn btn-danger' %>
 </div>
+
+<%= render :partial => "/board_engine/comments/comment_area", :locals => {:object => @article, :color => 'green'} %>

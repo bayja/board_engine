@@ -1,0 +1,44 @@
+<div class="comments_wrapper">
+  <h4>댓글 남기기</h4>
+  <% if current_user %>
+    <div class="new_comment_area">
+      <% new_comment = BoardEngine::Comment.new(:commentable_type => object.class.model_name, :commentable_id => object.id) %>
+      <%= simple_form_for new_comment do |f| %>
+        <%= f.input :commentable_type, as: 'hidden'  %>
+        <%= f.input :commentable_id, as: 'hidden' %>
+        <%= f.input :body, :input_html => {:style => 'width: 550px; height: 40px;'} %>
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%#= f.hidden_field :commentable_type %>
+        <%#= f.hidden_field :commentable_id %>
+        <%#= f.text_area :body, :class => "body" %>
+        <%#= f.submit :class => color %>
+        <div class="clear"></div>
+      <% end %>
+    </div>
+    
+  <% else %>
+    <p id="comment_login_required">
+      로그인 후 댓글을 남길 수 있습니다. <<%= link_to '로그인', login_path(:redirect_to => request.path) %>>
+    </p>
+  <% end %>
+
+  <% if object.comments.count > 0 %>
+    <div class="comment_list_area">
+      <% object.comments.order("created_at DESC").each_with_index do |comment, i| %>
+        <div class="comment_box <%= 'first' if i == 0 %>">
+          <% if current_user && current_user == comment.user %>
+            <div class="delete"><%= link_to '삭제', comment, :method => "delete", :confirm => "정말로 삭제하시겠습니까?" %></div>
+          <% end %>
+          <div class="user_detail">
+            <p><%= comment.user_nickname %></p>
+            <span><%= l comment.created_at.to_date %></span>
+          </div>
+          <div class="body">
+            <%= comment.body %>
+          </div>
+          <div class="clear"></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

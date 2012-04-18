@@ -1,7 +1,7 @@
 <h1><%= t @board.title %></h1>
 
-<% @articles.each do |article| %>
-  <ul class="thumbnails">
+<ul class="thumbnails">
+  <% @articles.each do |article| %>
     <li class="span3">
       <div class="thumbnail">
         <%= image_tag article.attached_picture.url %>
@@ -9,8 +9,8 @@
         <p><%= truncate strip_tags(article.body), :length => 150 %></p>
       </div>
     </li>
-  </ul>  
-<% end %>
+  <% end %>
+</ul>  
 
 <%= paginate @articles %>
 
