@@ -1,0 +1,19 @@
+<div class="comments_wrapper">
+  <% if object.comments.count > 0 %>
+    <div class="comment_list_area">
+      <% object.comments.order("created_at DESC").each_with_index do |comment, i| %>
+        <div class="comment_box <%= 'first' if i == 0 %>">
+          <div class="delete"><%= link_to '삭제', admin_comment_path(comment), :method => "delete", :confirm => "정말로 삭제하시겠습니까?" %></div>
+          <div class="user_detail">
+            <p><%= comment.user.try(:nick_name) %></p>
+            <span><%= l comment.created_at.to_date %></span>
+          </div>
+          <div class="body">
+            <%= simple_format comment.body %>
+          </div>
+          <div class="clear"></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

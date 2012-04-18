@@ -1,0 +1,28 @@
+<h2>게시판 목록</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>게시판 이름</th>
+      <th>내용</th>
+      <th>등록일</th>
+      <th>게시물 링크</th>
+      <td>삭제</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= t comment.commentable.board.title %></td>
+        <td><%= simple_format comment.body %></td>
+        <td><%= l comment.created_at %></td>
+        <td><%= link_to '게시물 보기', admin_article_path(comment.commentable.board.title, comment.commentable), :class => 'btn btn-mini' %></td>
+        <td><%= link_to '삭제', admin_comment_path(comment), method: 'delete', confirm: '정말로 삭제하시겠습니까?', :class => 'btn btn-mini btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @comments %>

@@ -5,7 +5,7 @@
     <li class="span3">
       <div class="thumbnail">
         <%= image_tag article.attached_picture.url %>
-        <h5><%= link_to truncate(article.title, :length => 20), article_path(@board.title, article) %></h5>
+        <h5><%= link_to truncate(article.title, :length => 20), admin_article_path(@board.title, article) %></h5>
         <p><%= truncate strip_tags(article.body), :length => 150 %></p>
       </div>
     </li>

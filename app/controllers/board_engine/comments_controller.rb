@@ -5,7 +5,7 @@ class BoardEngine::CommentsController < ApplicationController
 	before_filter :require_user
 	before_filter(:only => :destroy) do |c|
 		@comment = BoardEngine::Comment.find params[:id]
-		c.send(:owner_required, @comment)
+		c.send(:require_owner, @comment)
 	end
 
   def create
