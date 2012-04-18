@@ -11,6 +11,6 @@ module BoardEngine
     belongs_to :user
     has_many	 :comments, :as => :commentable, :dependent => :destroy
     
-    validates_presence_of :title, :body, :board_id
+    validates_presence_of :title, :body, :board_id, :user_id
   end
 end

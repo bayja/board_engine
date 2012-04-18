@@ -4,13 +4,13 @@ class BoardEngine::ArticlesController < ApplicationController
 	before_filter :is_from_engine
 	before_filter :find_board
 	before_filter :require_user, :only => [:new, :edit, :create, :update, :destroy]
+	before_filter(:only => [:update, :destroy]) do |c|
+		@article = BoardEngine::Article.find params[:id]
+		c.send(:require_owner, @article)
+	end
 
 	def index
 		@articles = @board.articles.order("created_at DESC").page(params[:page]).per(15)
-		# prepend_view_path('/Users/bayja/RoR_Projects/unnine/app/views/board_engine')
-		# raise view_paths.inspect
-
-
 	end
 
 	def show
@@ -28,6 +28,7 @@ class BoardEngine::ArticlesController < ApplicationController
 
 	def create
 		@article = @board.articles.build params[:article]
+		@article.user_id = current_user.id
 		if @article.save
 			redirect_to article_path(@board.title, @article)
 		else
