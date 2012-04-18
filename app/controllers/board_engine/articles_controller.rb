@@ -3,9 +3,14 @@
 class BoardEngine::ArticlesController < ApplicationController
 	before_filter :is_from_engine
 	before_filter :find_board
+	before_filter :require_user, :only => [:new, :edit, :create, :update, :destroy]
 
 	def index
 		@articles = @board.articles.order("created_at DESC").page(params[:page]).per(15)
+		# prepend_view_path('/Users/bayja/RoR_Projects/unnine/app/views/board_engine')
+		# raise view_paths.inspect
+
+
 	end
 
 	def show
@@ -56,8 +61,9 @@ class BoardEngine::ArticlesController < ApplicationController
 		@is_from_engine = true
 	end
 
-	# board type에 따라 다른 template을 render (AbstractController::Rendering#_process_options)
+	# customize template path (AbstractController::Rendering#_process_options)
 	def _process_options(options)
-		options[:prefixes] << "board_engine/articles/type_#{@board.board_type}"
+		options[:prefixes] << "board_engine/#{@board.title.pluralize}" #main app에서 view customize용
+		options[:prefixes] << "board_engine/articles/type_#{@board.board_type}" #board_engine에서 board_type별로 template render
 	end
 end
