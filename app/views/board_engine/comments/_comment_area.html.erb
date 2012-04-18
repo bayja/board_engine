@@ -30,11 +30,11 @@
             <div class="delete"><%= link_to '삭제', comment, :method => "delete", :confirm => "정말로 삭제하시겠습니까?" %></div>
           <% end %>
           <div class="user_detail">
-            <p><%= comment.user_nickname %></p>
+            <p><%= comment.user.try(:nick_name) %></p>
             <span><%= l comment.created_at.to_date %></span>
           </div>
           <div class="body">
-            <%= comment.body %>
+            <%= simple_format comment.body %>
           </div>
           <div class="clear"></div>
         </div>
