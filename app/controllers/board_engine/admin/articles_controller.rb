@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class BoardEngine::Admin::ArticlesController < BoardEngine::Admin::AdminsController
+	before_filter :require_user, :only => [:new, :edit, :create, :update, :destroy]
 	before_filter :find_board
 
 	def index
@@ -22,6 +23,7 @@ class BoardEngine::Admin::ArticlesController < BoardEngine::Admin::AdminsControl
 
 	def create
 		@article = @board.articles.build params[:article]
+		@article.user_id = current_user.id
 		if @article.save
 			redirect_to admin_article_path(@board.title, @article)
 		else
