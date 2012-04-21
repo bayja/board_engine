@@ -18,19 +18,22 @@
   <% end %>
 
   <% if object.comments.count > 0 %>
-    <div class="comment_list_area">
+    <div class="comment_list_area well">
       <% object.comments.order("created_at DESC").each_with_index do |comment, i| %>
         <div class="comment_box <%= 'first' if i == 0 %>">
-          <% if current_user && current_user == comment.user %>
-            <div class="delete"><%= link_to '삭제', comment, :method => "delete", :confirm => "정말로 삭제하시겠습니까?" %></div>
-          <% end %>
-          <div class="user_detail">
-            <p><%= comment.user.try(:nick_name) %></p>
-            <span><%= l comment.created_at.to_date %></span>
+          <div>
+            <span style="font-weight: bold;"><%= comment.user.try(:nick_name) %></span>
+            <span><%= l comment.created_at.to_date %></span> 
+            <% if owner_of?(comment) %>
+              <span class="delete">
+                <%= link_to '삭제', comment, :method => "delete", :confirm => "정말로 삭제하시겠습니까?" %>
+              </span>
+            <% end %>
           </div>
-          <div class="body">
+          <div style="margin-left: 10px;">
             <%= simple_format comment.body %>
           </div>
+          <hr >
           <div class="clear"></div>
         </div>
       <% end %>
