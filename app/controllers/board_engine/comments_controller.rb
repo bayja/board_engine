@@ -11,12 +11,11 @@ class BoardEngine::CommentsController < ApplicationController
   def create
   	@comment = BoardEngine::Comment.new params[:comment]
   	@comment.user_id = current_user.id
-    
+
     if @comment.save
-    	article = @comment.commentable
-    	redirect_to article_path(article.board.title, article), notice: '댓글을 저장했습니다.'
+    	redirect_to article_path(@comment.commentable.board.title, @comment.commentable), notice: '댓글을 저장했습니다.'
     else
-    	redirect_to article_path(article.board.title, article), notice: '댓글을 저장했습니다.'
+    	redirect_to article_path(@comment.commentable.board.title, @comment.commentable), alert: '댓글을 저장하지 못했습니다.'
     end
   end
   

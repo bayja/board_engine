@@ -3,11 +3,11 @@
   <% if current_user %>
     <div class="new_comment_area">
       <% new_comment = BoardEngine::Comment.new(:commentable_type => object.class.model_name, :commentable_id => object.id) %>
-      <%= simple_form_for new_comment do |f| %>
-        <%= f.input :commentable_type, as: 'hidden'  %>
-        <%= f.input :commentable_id, as: 'hidden' %>
-        <%= f.input :body, :input_html => {:style => 'width: 550px; height: 40px;'} %>
-        <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= form_for new_comment, :html => { :class => 'form-inline' } do |f| %>
+        <%= f.hidden_field :commentable_type %>
+        <%= f.hidden_field :commentable_id %>
+        <%= f.text_area :body, :style => "width: 570px; height: 40px;" %>
+        <%= f.submit '댓글 등록', :class => 'btn btn-primary btn-large', :style => 'margin: 7px;' %>
       <% end %>
     </div>
     
